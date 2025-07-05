@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: 167239449235.dkr.ecr.us-east-1.amazonaws.com/webapp-repo
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DBHOST
+          value: "mysql"
+        - name: DBPWD
+          value: "root"
+        - name: APP_COLOR
+          value: "blue"

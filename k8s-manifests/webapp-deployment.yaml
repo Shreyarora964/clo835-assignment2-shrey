@@ -2,25 +2,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webapp-deployment
+  namespace: webapp-ns
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: webapp
+      app: employees
   template:
     metadata:
       labels:
-        app: webapp
+        app: employees
     spec:
       containers:
       - name: webapp
-        image: 167239449235.dkr.ecr.us-east-1.amazonaws.com/webapp-repo
+        image: 167239449235.dkr.ecr.us-east-1.amazonaws.com/webapp-repo:v4
         ports:
         - containerPort: 8080
         env:
         - name: DBHOST
-          value: "mysql"
+          value: "mysql.mysql-ns.svc.cluster.local"
         - name: DBPWD
           value: "root"
         - name: APP_COLOR
           value: "blue"
+      imagePullSecrets:
+      - name: regcred

@@ -63,7 +63,7 @@ resource "aws_security_group" "clo_sg" {
 # EC2 instance
 resource "aws_instance" "app_server" {
   ami                         = "ami-053b0d53c279acc90"
-  instance_type               = "t2.micro"
+  instance_type               = "t3.large"
   key_name                    = aws_key_pair.clo_key.key_name
   vpc_security_group_ids      = [aws_security_group.clo_sg.id]
   associate_public_ip_address = true

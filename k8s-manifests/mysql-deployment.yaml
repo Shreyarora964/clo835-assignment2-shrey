@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-deployment
+  namespace: mysql-ns
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: mysql
@@ -20,3 +21,5 @@ spec:
           value: "root"
         ports:
         - containerPort: 3306
+      imagePullSecrets:
+      - name: regcred
